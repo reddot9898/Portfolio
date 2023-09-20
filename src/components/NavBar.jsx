@@ -1,121 +1,170 @@
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import React, { useEffect, useState, useContext } from 'react';
-import { withRouter } from 'react-router';
-import { NavLink } from 'react-router-dom';
-import styled, { ThemeContext } from 'styled-components';
-import endpoints from '../constants/endpoints';
-import ThemeToggler from './ThemeToggler';
+import React from "react";
+import PropTypes from "prop-types";
+import { useAppContext } from "../appContext";
+import { Link as ScrollLink } from "react-scroll";
+import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
+// Icons
+import { Icon } from "@iconify/react";
+// Components
+import { Container, Nav, Navbar } from "react-bootstrap";
+// Images
+import Logo from "./defaultNavLogo.svg";
 
-const styles = {
-  logoStyle: {
-    width: 50,
-    height: 40,
-  },
-};
+// #region styled-components
+const StyledSwitch = styled.label`
+  /* Slider pill */
+  display: flex;
+  width: 3.2rem;
+  font-size: 1.5rem;
+  border-radius: 30px;
+  transition: var(--transition);
+  border: 2px solid;
 
-const ExternalNavLink = styled.a`
-  color: ${(props) => props.theme.navbarTheme.linkColor};
-  &:hover {
-    color: ${(props) => props.theme.navbarTheme.linkHoverColor};
+  /* Hide defualt checkbox */
+  input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    opacity: 0;
   }
-  &::after {
-    background-color: ${(props) => props.theme.accentColor};
+
+  /* Move span when checked */
+  input[type="checkbox"]:checked + div {
+    transform: translateX(100%);
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
   }
 `;
 
-const InternalNavLink = styled(NavLink)`
-  color: ${(props) => props.theme.navbarTheme.linkColor};
-  &:hover {
-    color: ${(props) => props.theme.navbarTheme.linkHoverColor};
-  }
-  &::after {
-    background-color: ${(props) => props.theme.accentColor};
-  }
-  &.navbar__link--active {
-    color: ${(props) => props.theme.navbarTheme.linkActiveColor};
-  }
+const FixedNavSpacer = styled.div`
+  height: var(--nav-height);
 `;
 
-const NavBar = () => {
-  const theme = useContext(ThemeContext);
-  const [data, setData] = useState(null);
-  const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    fetch(endpoints.navbar, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => err);
-  }, []);
+function ThemeToggle() {
+  const { theme, toggleTheme, closeExpanded } = useAppContext();
 
   return (
-    <Navbar
-      fixed="top"
-      expand="md"
-      bg="dark"
-      variant="dark"
-      className="navbar-custom"
-      expanded={expanded}
-    >
-      <Container>
-        {data?.logo && (
-          <Navbar.Brand href="/">
-            <img
-              src={data?.logo?.source}
-              className="d-inline-block align-top"
-              alt="main logo"
-              style={
-                data?.logo?.height && data?.logo?.width
-                  ? { height: data?.logo?.height, width: data?.logo?.width }
-                  : styles.logoStyle
-              }
-            />
-          </Navbar.Brand>
+    <StyledSwitch onClick={closeExpanded}>
+      <input
+        type="checkbox"
+        aria-label={`Toggle theme, currently ${theme}.`}
+        onClick={toggleTheme}
+      />
+      <div>
+        {theme === "light" ? (
+          <Icon icon="game-icons:sunflower" />
+        ) : (
+          <Icon icon="game-icons:moon" />
         )}
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          onClick={() => setExpanded(!expanded)}
-        />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto" />
-          <Nav>
-            {data
-              && data.sections?.map((section, index) => (section?.type === 'link' ? (
-                <ExternalNavLink
-                  key={section.title}
-                  href={section.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setExpanded(false)}
-                  className="navbar__link"
-                  theme={theme}
-                >
-                  {section.title}
-                </ExternalNavLink>
-              ) : (
-                <InternalNavLink
-                  key={section.title}
-                  onClick={() => setExpanded(false)}
-                  exact={index === 0}
-                  activeClassName="navbar__link--active"
-                  className="navbar__link"
-                  to={section.href}
-                  theme={theme}
-                >
-                  {section.title}
-                </InternalNavLink>
-              )))}
-          </Nav>
-          <ThemeToggler
-            onClick={() => setExpanded(false)}
-          />
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </div>
+    </StyledSwitch>
   );
+}
+// #endregion
+
+// #region component
+const propTypes = {
+  Logo: PropTypes.node.isRequired,
 };
 
-const NavBarWithRouter = withRouter(NavBar);
-export default NavBarWithRouter;
+const defaultProps = {
+  Logo: Logo,
+};
+
+export default function NavBar({ Logo }) {
+  const { theme, isExpanded, closeExpanded, toggleExpanded } = useAppContext();
+  const { pathname } = useLocation();
+  const navLinks = {
+    routes: [
+      { id: "1R", name: "Home", route: "/" },
+      { id: "2R", name: "All Projects", route: "/All-Projects" },
+    ],
+    to: [
+      { id: "1T", name: "Home", to: "Home" },
+      { id: "2T", name: "About Me", to: "About" },
+      { id: "3T", name: "Skills", to: "Skills" },
+      { id: "4T", name: "Projects", to: "Projects" },
+      { id: "5T", name: "Contact", to: "Contact" },
+    ],
+  };
+
+  return (
+    <>
+      <FixedNavSpacer />
+      <Navbar
+        id="nav"
+        collapseOnSelect={true}
+        expand="lg"
+        expanded={isExpanded}
+        bg={theme === "light" ? "light" : "dark"}
+        variant={theme === "light" ? "light" : "dark"}
+        fixed="top"
+      >
+        <Container>
+          <Navbar.Brand>
+            <img
+              alt="Logo"
+              src={Logo}
+              width="35"
+              height="35"
+              className="rounded-circle"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="responsive-navbar-nav"
+            onClick={toggleExpanded}
+          />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav navbarScroll className="me-auto">
+              {pathname === "/"
+                ? navLinks.to.map((el) => {
+                  return (
+                    <Nav.Item key={el.id}>
+                      <ScrollLink
+                        to={el.to}
+                        spy={true}
+                        activeClass="active"
+                        className="nav-link"
+                        onClick={closeExpanded}
+                      >
+                        {el.name}
+                      </ScrollLink>
+                    </Nav.Item>
+                  );
+                })
+                : navLinks.routes.map((el) => {
+                  return (
+                    <Nav.Item key={el.id}>
+                      <Link
+                        to={el.route}
+                        className={
+                          pathname === el.route
+                            ? "nav-link active"
+                            : "nav-link"
+                        }
+                        onClick={closeExpanded}
+                      >
+                        {el.name}
+                      </Link>
+                    </Nav.Item>
+                  );
+                })}
+            </Nav>
+            <Nav>
+              <ThemeToggle />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  );
+}
+
+NavBar.propTypes = propTypes;
+NavBar.defaultProps = defaultProps;
+// #endregion

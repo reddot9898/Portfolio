@@ -1,77 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import PropTypes from 'prop-types';
-import Fade from 'react-reveal';
-import { Container } from 'react-bootstrap';
-import Header from './Header';
-import endpoints from '../constants/endpoints';
-import FallbackSpinner from './FallbackSpinner';
+import { useAppContext } from "../appContext";
+import { Element } from "react-scroll";
+// Data
+import { skillData, resume } from "../data";
+// Components
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Title } from "./globalStyledComponents";
 
-const styles = {
-  iconStyle: {
-    height: 75,
-    width: 75,
-    margin: 10,
-    marginBottom: 0,
-  },
-  introTextContainer: {
-    whiteSpace: 'pre-wrap',
-  },
-};
-
-function Skills(props) {
-  const { header } = props;
-  const [data, setData] = useState(null);
-
-  const renderSkillsIntro = (intro) => (
-    <h4 style={styles.introTextContainer}>
-      <ReactMarkdown children={intro} />
-    </h4>
-  );
-
-  useEffect(() => {
-    fetch(endpoints.skills, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => err);
-  }, []);
+export default function Skills() {
+  const { theme } = useAppContext();
 
   return (
-    <>
-      <Header title={header} />
-      {data ? (
-        <Fade>
-          <div className="section-content-container">
-            <Container>
-              {renderSkillsIntro(data.intro)}
-              {data.skills?.map((rows) => (
-                <div key={rows.title}>
-                  <br />
-                  <h3>{rows.title}</h3>
-                  {rows.items.map((item) => (
-                    <div key={item.title} style={{ display: 'inline-block' }}>
-                      <img
-                        style={styles.iconStyle}
-                        src={item.icon}
-                        alt={item.title}
-                      />
-                      <p>{item.title}</p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </Container>
-          </div>
-        </Fade>
-      ) : <FallbackSpinner /> }
-    </>
+    <Element name={"Skills"} id="skills">
+      <section className="section">
+        <Container className="text-center">
+          <Title>
+            <h2>Skills</h2>
+            <div className="underline"></div>
+          </Title>
+          <Row className="mt-3 align-items-center">
+            {skillData.map((skills) => {
+              return (
+                <Col xs={4} key={skills.id} className="my-md-5">
+                  <figure>
+                    {skills.skill}
+                    <figcaption>{skills.name}</figcaption>
+                  </figure>
+                </Col>
+              );
+            })}
+          </Row>
+          {resume && (
+            <a href={resume}>
+              <Button
+                size="lg"
+                variant={theme === "light" ? "outline-dark" : "outline-light"}
+                className="mt-5"
+              >
+                R&eacute;sum&eacute;
+              </Button>
+            </a>
+          )}
+        </Container>
+      </section>
+    </Element>
   );
 }
-
-Skills.propTypes = {
-  header: PropTypes.string.isRequired,
-};
-
-export default Skills;
