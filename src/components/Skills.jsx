@@ -1,4 +1,4 @@
-import { useAppContext } from "../appContext";
+import { useAppContext } from "../AppContext";
 import { Element } from "react-scroll";
 // Data
 import { skillData, resume } from "../data";

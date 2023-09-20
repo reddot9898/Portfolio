@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useAppContext } from "../appContext";
+import { useAppContext } from "../AppContext";
 import { Link as ScrollLink } from "react-scroll";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";

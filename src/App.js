@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppContext } from "./appContext";
+import { useAppContext } from "./AppContext";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchGitHubInfo,
