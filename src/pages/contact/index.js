@@ -26,6 +26,7 @@ export const ContactUs = () => {
       user_name: formData.name,
       to_name: contactConfig.YOUR_EMAIL,
       message: formData.message,
+      public_key: 'OPNYIXsaple3OyeSK',
     };
 
     emailjs
@@ -33,7 +34,8 @@ export const ContactUs = () => {
         contactConfig.YOUR_SERVICE_ID,
         contactConfig.YOUR_TEMPLATE_ID,
         templateParams,
-        contactConfig.YOUR_USER_ID
+        contactConfig.YOUR_USER_ID,
+
       )
       .then(
         (result) => {
@@ -83,9 +85,8 @@ export const ContactUs = () => {
             <Alert
               //show={formData.show}
               variant={formData.variant}
-              className={`rounded-0 co_alert ${
-                formData.show ? "d-block" : "d-none"
-              }`}
+              className={`rounded-0 co_alert ${formData.show ? "d-block" : "d-none"
+                }`}
               onClose={() => setFormdata({ show: false })}
               dismissible
             >

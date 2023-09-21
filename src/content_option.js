@@ -1,9 +1,14 @@
 import yourImage from './pages/profile-pic.jpg'
+import techBlog from './pages/tech-blog.jpg'
+import bookSearch from './pages/booksearch.png'
+import weatherImage from './pages/weatherstack-forecast.webp'
+import eCommerce from './pages/ecommerce.jpg'
+import textEditor from './pages/texteditor.gif'
 
 const logotext = "Home";
 const meta = {
     title: "Randyn Collins",
-    description: "I’m John Doe data scientist _ Full stack devloper,currently working in Berlin",
+    description: "I’m John Doe data scientist _ Full stack developer,currently working in Berlin",
 };
 
 const introdata = {
@@ -13,7 +18,7 @@ const introdata = {
         second: "I'm looking to make an impact at your company",
         third: "Thank you for checking out my portfolio ! ",
     },
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum",
+    description: "",
     your_img_url: yourImage,
 };
 
@@ -98,83 +103,49 @@ const services = [{
 ];
 
 const dataportfolio = [{
-    img: "https://picsum.photos/400/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
+    img: techBlog,
+    description: " Simple Tech Blog App Built with MySQL and JavaScript,  Users can create accounts, publish articles, engage in discussions, and stay updated on the latest tech trends. ",
+    link: "https://github.com/reddot9898/tech-blog",
 },
 {
-    img: "https://picsum.photos/400/800/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
+    img: bookSearch,
+    description: "This is a MERN stack (MongoDB, Express.js, React.js, Node.js) application that searches Google Books for a given book title, then displays the results.  ",
+    link: "https://github.com/reddot9898/book-search-engine",
 },
 {
-    img: "https://picsum.photos/400/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
+    img: weatherImage,
+    description: "This WeatherAPI App is a powerful and user-friendly tool for accessing current weather conditions and forecasts.",
+    link: "https://github.com/reddot9898/weather-api-tracker",
 },
 {
-    img: "https://picsum.photos/400/600/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
+    img: eCommerce,
+    description: "This project was to build the back end for an e-commerce website. We were provided basic starter code and had to configure all data base, express, api, sequelize and mysql data base.",
+    link: "https://github.com/reddot9898/e-commerce-app",
 },
 {
-    img: "https://picsum.photos/400/300/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/700/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
+    img: textEditor,
+    description: "The application is a web text editor where the user can create notes or code snippets with or without an internet connection and where the user can reliably retrieve them for later use.",
+    link: "https://github.com/reddot9898/text-editor",
 },
 
-{
-    img: "https://picsum.photos/400/600/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/300/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/550/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
-{
-    img: "https://picsum.photos/400/700/?grayscale",
-    description: "The wisdom of life consists in the elimination of non-essentials.",
-    link: "#",
-},
 ];
 
 const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "(555)123-4567",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
+    YOUR_EMAIL: "randyncollins4@gmail.com",
+    YOUR_FONE: "304-663-7617",
+    description: "Feel free to get in touch with me anytime. Whether you have questions, project inquiries, or just want to say hello, I'm here to connect. You can reach out through the provided contact form, email, or connect with me on social media. I'm excited to hear from you and explore how we can collaborate! ",
     // creat an emailjs.com account 
     // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
-    YOUR_SERVICE_ID: "service_id",
+    YOUR_SERVICE_ID: "service_m3kmlol",
     YOUR_TEMPLATE_ID: "template_id",
     YOUR_USER_ID: "user_id",
+
 };
 
 const socialprofils = {
-    github: "https://github.com",
+    github: "https://github.com/reddot9898",
     facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://www.linkedin.com/feed/",
     twitter: "https://twitter.com",
 };
 export {
