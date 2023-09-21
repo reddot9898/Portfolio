@@ -94,7 +94,7 @@ const services = [{
 },
 {
     title: "Back End Dev",
-    description: "Create and maintain server-side applications and APIs to handle data processing, authentication, and business logic.Design and manage databases using technologies like MySQL, PostgreSQL, MongoDB, or Firebase.Ensure data integrity, security, and efficient data retrieval.",
+    description: "Create and maintain server-side applications and APIs to handle data processing, authentication, and business logic.Design and manage databases using technologies like MySQL and MongoDB.Ensure data integrity, security, and efficient data retrieval.",
 },
 {
     title: "React Creator",
