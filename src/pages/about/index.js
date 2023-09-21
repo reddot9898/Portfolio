@@ -4,6 +4,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   dataabout,
+  databout2,
   meta,
   worktimeline,
   skills,
@@ -32,6 +33,15 @@ export const About = () => {
           <Col lg="7" className="d-flex align-items-center">
             <div>
               <p>{dataabout.aboutme}</p>
+            </div>
+          </Col>
+          <Col lg="5">
+            <h3 className="color_sec py-4">{databout2.title}</h3>
+          </Col>
+
+          <Col lg="7" className="d-flex align-items-center">
+            <div>
+              <p>{databout2.aboutme2}</p>
             </div>
           </Col>
         </Row>
